@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/schema/db.changelog-schema.sql
+      context: test
+  - include:
+      file: db/changelog/tables/db.changelog-tables.sql
+      context: test
+  - include:
+      file: db/changelog/data/db.changelog-data.sql
+      context: test
