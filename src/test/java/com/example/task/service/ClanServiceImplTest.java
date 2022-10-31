@@ -1,10 +1,14 @@
 package com.example.task.service;
 
+import com.example.task.model.Clan;
+import com.example.task.repository.ClanRepositoryImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,6 +18,8 @@ public class ClanServiceImplTest {
 
     @Autowired
     TaskService taskService;
+    @Autowired
+    ClanRepositoryImpl repository;
 
     @Test
     public void test() throws InterruptedException {
@@ -24,6 +30,8 @@ public class ClanServiceImplTest {
             Thread.sleep(10);
         }
         Thread.sleep(2000);
+        Optional<Clan> clanOptional = repository.getClanById(1);
+        Assertions.assertEquals(clanOptional.get().getGold(), 11000);
     }
 
 }
