@@ -35,11 +35,11 @@ public class ClanRepositoryImpl implements ClanRepository {
             }
             connection.setAutoCommit(false);
             int goldBefore = resultSet.getInt("gold");
-            if (goldBefore + addingGold < 0) {
+            int goldTotal = goldBefore + addingGold;
+            if (goldTotal < 0) {
                 log.info("Клану " + clanId + " не хватает средств. Надо " + addingGold + " есть " + goldBefore);
                 return;
             }
-            int goldTotal = goldBefore + addingGold;
             resultSet.updateInt(3, goldTotal);
             resultSet.updateRow();
             log.info("Клан " + clanId + " получил " + addingGold + " от пользователя " + userId + ". Было " + goldBefore + " Стало " + goldTotal);

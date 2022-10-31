@@ -10,17 +10,17 @@ import java.util.concurrent.Executors;
 
 @SpringBootTest
 @ActiveProfiles({"h2"})
-public class ClanServiceImplTest {
+public class ClanServiceLocalImplTest {
 
     @Autowired
-    TaskService taskService;
+    ClanServiceLocalImpl service;
 
     @Test
     public void test() throws InterruptedException {
         int MAX_SIZE = 100;
         ExecutorService exec = Executors.newFixedThreadPool(MAX_SIZE);
         for (int i = 0; i < MAX_SIZE; i++) {
-            exec.execute(() -> taskService.completeTask(1, 1, 1, 100));
+            exec.execute(() -> service.addGoldToClan(1, 1, 100));
             Thread.sleep(10);
         }
         Thread.sleep(2000);
