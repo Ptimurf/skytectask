@@ -1,7 +1,6 @@
 package com.example.task.service;
-
 import com.example.task.model.Clan;
 
 public interface ClanService {
-    Clan get(long clanId);
+    void addGoldToClan(long userId, long clanId, int gold);
 }

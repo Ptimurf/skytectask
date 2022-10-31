@@ -1,11 +1,9 @@
 package com.example.task.config;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
-import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {
@@ -20,12 +18,17 @@ public class DataSourceConfig {
     private String dbPass;
 
     @Bean
-    public DataSource mysqlDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    public BasicDataSource mysqlDataSource() {
+        BasicDataSource  dataSource = new BasicDataSource ();
         dataSource.setDriverClassName(dbDriver);
         dataSource.setUrl(dbUrl);
         dataSource.setUsername(dbUser);
         dataSource.setPassword(dbPass);
+        dataSource.setInitialSize(100);
+        dataSource.setMinIdle(100);
+        dataSource.setMaxIdle(30);
+        dataSource.setMaxTotal(30);
+        dataSource.setMaxOpenPreparedStatements(100);
         return dataSource;
     }
 }
